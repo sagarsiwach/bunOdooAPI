@@ -28,6 +28,7 @@ jobs:
           echo "Running on $(uname -a)"
           echo "Node.js version: $(node -v)"
           echo "NPM version: $(npm -v)"
+          ssh -T ubuntu@15.207.19.12
 
       - name: Copy files via SCP
         run: |
