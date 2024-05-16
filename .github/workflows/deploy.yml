@@ -47,6 +47,8 @@ jobs:
       - name: SSH into EC2 and deploy
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@15.207.19.12 << 'EOF'
+            # Ensure pm2 is installed
+            sudo npm install -g pm2
             cd /home/ubuntu/bunOdooAPI
             pm2 restart server.js --name my-odoo-api || pm2 start server.js --name my-odoo-api
           EOF
