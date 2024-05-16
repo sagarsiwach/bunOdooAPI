@@ -36,9 +36,13 @@ jobs:
           echo "NPM version: $(npm -v)"
           ssh -T ubuntu@15.207.19.12
 
+      - name: List directory contents
+        run: |
+          ls -la
+
       - name: Copy files via SCP
         run: |
-          scp -r -o StrictHostKeyChecking=no ./bunOdooAPI/* ubuntu@15.207.19.12:/home/ubuntu/bunOdooAPI/
+          scp -r -o StrictHostKeyChecking=no ./* ubuntu@15.207.19.12:/home/ubuntu/bunOdooAPI/
 
       - name: SSH into EC2 and deploy
         run: |
