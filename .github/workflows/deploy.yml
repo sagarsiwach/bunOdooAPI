@@ -50,5 +50,5 @@ jobs:
             # Ensure pm2 is installed
             sudo npm install -g pm2
             cd /home/ubuntu/bunOdooAPI
-            pm2 restart server.js --name my-odoo-api || pm2 start server.js --name my-odoo-api
+            pm2 restart bunOdooAPI/server.js --name my-odoo-api || pm2 start server.js --name my-odoo-api
           EOF
