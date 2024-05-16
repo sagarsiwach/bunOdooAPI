@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3 # Updated to v3
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -22,6 +22,12 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add EC2 instance to known_hosts
+        run: |
+          echo "15.207.19.12 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCgW3oeKRyyooRLYj+vJ+uiwEQuXsDrlnGrRkdbDm59fCEZGsvdv4Go0+LXzkXJT2HsA9JVNktH3kt1hcLW6/CAmJfJN23BxyFOLdFMrb8fxn1yFJSXurOLJ9oOUEEOLS8B6n/sVmI7gUWMzaB5fNZLROuF83SmuGUuqqpDbBBLczimonoguu/YXrrdDkKMdwaJNR0YcTQLQE8Q6MrN/Cc5fNBJgegc+vCrcy0xOYjPOnwmNG7jdcAB6CIvNFfOx+4bNQ9xi/8LrcLDk77CleJfva5YVf6pQHWuy7A65cmaHIAb9zhW6G5Mxu/WmjIaqHBIXq+gLMl26OTHR/3vK3CCFT4MioSpjIfVqeHYBOZI8ueOhu4Nj0dBqF0P3Lb/l9Xsc2NDSPhzKW1/8GPf5tO/4ArtXLUZu8C0jmwDe6d3/EvV7JOGq1vLrPFvpXs+SLZePb6bZPbZkaJi6pDGZPkMqAHIPjIbcRfouucRb4+ZrAuMmAa9PsrQgFeanmxYl+U=" >> ~/.ssh/known_hosts
+          echo "15.207.19.12 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBK5Luos6wT/dv6jv4+c+3nrcn0PYM2jnnEfXTCIM4VYXbeWYrOvpZqI0v26MU+F4EKbjl6S5a2WncfJeC7Hhrx4=" >> ~/.ssh/known_hosts
+          echo "15.207.19.12 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOYK1dUo/C4CU86LWz9yrp4WVMQqY10G284Un0oAjJ8u" >> ~/.ssh/known_hosts
 
       - name: Print debug info
         run: |
