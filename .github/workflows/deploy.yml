@@ -11,19 +11,31 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3 # Updated to v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
 
       - name: Add SSH key
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Print debug info
+        run: |
+          echo "Running on $(uname -a)"
+          echo "Node.js version: $(node -v)"
+          echo "NPM version: $(npm -v)"
+
       - name: Copy files via SCP
         run: |
-          scp -r -o StrictHostKeyChecking=no . ubuntu@15.207.19.12:/home/ubuntu/bunOdooAPI
+          scp -r -o StrictHostKeyChecking=no . ubuntu@<EC2_INSTANCE_PUBLIC_IP>:/home/ubuntu/github_repo
+
       - name: SSH into EC2 and deploy
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@15.207.19.12 << 'EOF'
-            cd /home/ubuntu/bunOdooAPI
+          ssh -o StrictHostKeyChecking=no ubuntu@<EC2_INSTANCE_PUBLIC_IP> << 'EOF'
+            cd /home/ubuntu/github_repo
             pm2 restart server.js --name my-odoo-api || pm2 start server.js --name my-odoo-api
           EOF
