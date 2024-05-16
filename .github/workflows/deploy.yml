@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "20"
+          node-version: '20'
 
       - name: Add SSH key
         uses: webfactory/ssh-agent@v0.5.3
@@ -38,7 +38,7 @@ jobs:
 
       - name: Copy files via SCP
         run: |
-          scp -r -o StrictHostKeyChecking=no ./ ubuntu@15.207.19.12:/home/ubuntu/bunOdooAPI
+          scp -r -o StrictHostKeyChecking=no * ubuntu@15.207.19.12:/home/ubuntu/bunOdooAPI
 
       - name: SSH into EC2 and deploy
         run: |
