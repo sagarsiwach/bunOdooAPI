@@ -38,7 +38,7 @@ jobs:
 
       - name: Copy files via SCP
         run: |
-          scp -r -o StrictHostKeyChecking=no . ubuntu@15.207.19.12:/home/ubuntu/bunOdooAPI
+          scp -r -o StrictHostKeyChecking=no ./ ubuntu@15.207.19.12:/home/ubuntu/bunOdooAPI
 
       - name: SSH into EC2 and deploy
         run: |
