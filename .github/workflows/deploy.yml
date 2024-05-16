@@ -31,11 +31,11 @@ jobs:
 
       - name: Copy files via SCP
         run: |
-          scp -r -o StrictHostKeyChecking=no . ubuntu@<EC2_INSTANCE_PUBLIC_IP>:/home/ubuntu/github_repo
+          scp -r -o StrictHostKeyChecking=no . ubuntu@15.207.19.12:/home/ubuntu/bunOdooAPI
 
       - name: SSH into EC2 and deploy
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@<EC2_INSTANCE_PUBLIC_IP> << 'EOF'
-            cd /home/ubuntu/github_repo
+          ssh -o StrictHostKeyChecking=no ubuntu@15.207.19.12 << 'EOF'
+            cd /home/ubuntu/bunOdooAPI
             pm2 restart server.js --name my-odoo-api || pm2 start server.js --name my-odoo-api
           EOF
